@@ -21,6 +21,7 @@ const priorityColours= {
     4:'red',
     5:'maroon'
 }
+const heldKeys=[]
 //functions
 const create= (name)=>{
         return document.createElement(name);
@@ -82,9 +83,41 @@ const sortList=()=>{
     list.innerHTML= '';
     listItems.forEach((x)=>list.appendChild(x));
 }
+let keyUp=(e)=>{
+    debugger
+    let lifted= e.which;
+    if(heldKeys.includes(lifted)) heldKeys.splice(heldKeys.indexOf(lifted),1);//remove lifted key from heldKeys
+    if(heldKeys.includes(17)){//if ctrl is held
+        switch (e.which){
+            case 49:
+                prioritySelector.value=1;
+                break;
+            case 50:
+                prioritySelector.value=2;
+                break;
+            case 51:
+                prioritySelector.value=3;
+                break;
+            case 52:
+                prioritySelector.value=4;
+                break;
+            case 53:
+                prioritySelector.value=5;
+                break;
+            default:
+                break;
+        }           
+    }
+}
 
-
+let keyDown =(e)=>{
+    const down=e.which;
+    if(heldKeys.includes(down))return;
+    heldKeys.push(down)
+}
 
 
 addButton.addEventListener('click',addItem);
 sortButton.addEventListener('click',sortList);
+document.addEventListener('keyup',keyUp)
+document.addEventListener('keydown',keyDown)
