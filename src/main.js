@@ -5,7 +5,7 @@ const input = document.getElementById('textInput');
 const prioritySelector =document.getElementById('prioritySelector');
 const addButton =document.getElementById('addButton');
 const counter= document.getElementById('counter')
-
+const errorLabel =document.getElementById('errorLabel')
 //useful resources
 const time= new Date();
 const year= time.getFullYear();
@@ -20,19 +20,32 @@ const priorityColours= {
     5:'maroon'
 }
 //functions
-
 const create= (name)=>{
-    return document.createElement(name);
+        return document.createElement(name);
+}
+const checkField=()=>{
+    errorLabel.hidden=true;
+    if (input.value===''){
+        errorLabel.toggleAttribute('hidden');
+        errorLabel.innerText= 'Can\'t create empty task';
+        return true;
+    }else if (prioritySelector.value===''){
+        errorLabel.toggleAttribute('hidden');
+        errorLabel.innerText= 'Task Priority must be set';
+        return true;
+    }else {return false;}
 }
 
 const addItem=(e)=>{
+    if (checkField()) return;
+    
     //container
     const item= create('div');
     list.appendChild(item)
     item.className='todoContainer';
     const done =create('button');
     //priority
-    debugger
+    
     const todoPriority= create('div');
     todoPriority.className= 'todoPriority';
     todoPriority.style.background=priorityColours[prioritySelector.value];
@@ -58,4 +71,4 @@ const addItem=(e)=>{
     input.focus();
 }
 
-addButton.addEventListener('click',addItem)
+addButton.addEventListener('click',addItem);
