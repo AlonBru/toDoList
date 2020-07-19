@@ -8,15 +8,17 @@ const counter= document.getElementById('counter')
 const errorLabel= document.getElementById('errorLabel')
 const sortButton= document.getElementById('sortButton')
 const item= document.getElementsByClassName('todoContainer')
+const PinButton= document.getElementById('priorityPin')
 //useful resources
+let priority_pinned = false;
 const time= new Date();
 const year= time.getFullYear();
 const month= (time.getMonth()<9)? '0'+(time.getMonth()+1):time.getMonth()+1;
 const day= time.getDate();
 let listItems= [];
 const priorityColours= {
-    1:'green',
-    2:'yellow',
+    1:'#009933',
+    2:'#CCAF46',
     3:'orange',
     4:'red',
     5:'maroon'
@@ -68,7 +70,7 @@ const addItem=()=>{
     listItems.push(item);
     counter.innerText= listItems.length
     //reset input fields
-    prioritySelector.value=''
+    if(!priority_pinned)prioritySelector.value=''
     input.value=null;
     input.focus();
     // sortList();
@@ -83,8 +85,8 @@ const sortList=()=>{
     list.innerHTML= '';
     listItems.forEach((x)=>list.appendChild(x));
 }
-let keyUp=(e)=>{
-    debugger
+const keyUp=(e)=>{
+    
     let lifted= e.which;
     if(heldKeys.includes(lifted)) heldKeys.splice(heldKeys.indexOf(lifted),1);//remove lifted key from heldKeys
     if(heldKeys.includes(17)){//if ctrl is held
@@ -110,14 +112,40 @@ let keyUp=(e)=>{
     }
 }
 
-let keyDown =(e)=>{
+const keyDown =(e)=>{
     const down=e.which;
+    if (e.which===13) addButton.click();
     if(heldKeys.includes(down))return;
     heldKeys.push(down)
 }
-
+const inputShortCuts=(e)=>{
+    
+    if(e.type=='focus'){
+    document.addEventListener('keyup',keyUp)
+    document.addEventListener('keydown',keyDown)
+    }else{
+        console.log('blur');
+        input.removeEventListener('keyup',keyUp);
+        input.removeEventListener('keydown',keyDown);
+    }
+}
+const pinPriority=()=>{
+    
+    if(priority_pinned===false){
+        PinButton.style.background='crimson';
+        PinButton.style.boxShadow= '-5px -5px inset rgba(100,100,100,.6)';
+        PinButton.style.color= 'white'
+        priority_pinned = true;
+    }else{
+        PinButton.style.background='whitesmoke';
+        PinButton.style.boxShadow= '';
+        PinButton.style.color= 'maroon';
+        priority_pinned = false;
+    }
+}
 
 addButton.addEventListener('click',addItem);
 sortButton.addEventListener('click',sortList);
-document.addEventListener('keyup',keyUp)
-document.addEventListener('keydown',keyDown)
+PinButton.addEventListener('click',pinPriority)
+input.addEventListener('focus',inputShortCuts);
+input.addEventListener('blur',inputShortCuts);

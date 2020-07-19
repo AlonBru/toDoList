@@ -4,8 +4,15 @@
     font-weight: bold;
     width: 20px;
     height:20px;
+    margin:0;
 }
 #todoContainer{
     
     width: auto;
+}
+#priorityPin{
+    border-radius: 50% 0 0 50%;
+    background:whitesmoke;
+    box-shadow:none;
+    color:maroon;
 }
