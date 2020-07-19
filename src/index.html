@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./main.js" async></script>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <h1>To Do List</h1>
+    <div id='control'>
+        <label for="inputText">Type in a new task:</label><br><br>
+        <input id='inputText' name="inputText" placeholder="e.g Take my towel">
+        <select id='prioritySelector' required>
+            <option id='priorityNull' value="" selected disabled>Set task priority (required)</option>
+            <option id='priority1' value="1">1:Least important</option>
+            <option id='priority2' value="2">2:Somewhat important</option>
+            <option id='priority3' value="3">3:Moderately important</option>
+            <option id='priority4' value="4">4:Very important</option>
+            <option id='priority5' value="5">5:Supremely important </option>
+        </select>
+        <button id='addButton'>Add task</button>
+    </div>
+    
+    <div id='view'>
+        
+    </div>
 </body>
 </html>
