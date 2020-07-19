@@ -8,7 +8,7 @@ const counter= document.getElementById('counter')
 const errorLabel= document.getElementById('errorLabel')
 const sortButton= document.getElementById('sortButton')
 const item= document.getElementsByClassName('todoContainer')
-const PinButton= document.getElementById('priorityPin')
+const pinButton= document.getElementById('priorityPin')
 //useful resources
 let priority_pinned = false;
 const time= new Date();
@@ -17,6 +17,7 @@ const month= (time.getMonth()<9)? '0'+(time.getMonth()+1):time.getMonth()+1;
 const day= time.getDate();
 let listItems= [];
 const priorityColours= {
+    0:'white',
     1:'#009933',
     2:'#CCAF46',
     3:'orange',
@@ -53,7 +54,7 @@ const addItem=()=>{
     const todoPriority= create('div');
     todoPriority.className= 'todoPriority';
     todoPriority.style.background=priorityColours[prioritySelector.value];
-    todoPriority.style.border= (prioritySelector.value==='5')? '2px dotted white':'1px solid black'
+    todoPriority.style.border= (prioritySelector.value==='5')? '2px as white':'1px solid black'
     todoPriority.innerText= prioritySelector.value;
     item.appendChild(todoPriority);
     //text
@@ -70,8 +71,11 @@ const addItem=()=>{
     listItems.push(item);
     counter.innerText= listItems.length
     //reset input fields
-    if(!priority_pinned)prioritySelector.value=''
-    input.value=null;
+    debugger
+    if(!priority_pinned){
+        prioritySelector.value=0;
+        prioritySelector.style.background=priorityColours[prioritySelector.value];
+    }input.value=null;
     input.focus();
     // sortList();
 }
@@ -119,33 +123,35 @@ const keyDown =(e)=>{
     heldKeys.push(down)
 }
 const inputShortCuts=(e)=>{
-    
-    if(e.type=='focus'){
-    document.addEventListener('keyup',keyUp)
-    document.addEventListener('keydown',keyDown)
-    }else{
-        console.log('blur');
-        input.removeEventListener('keyup',keyUp);
-        input.removeEventListener('keydown',keyDown);
-    }
+    document.addEventListener('keyup',keyUp);
+    document.addEventListener('keydown',keyDown); 
 }
+const removeInputShortCuts=(e)=>{
+    input.removeEventListener('keyup',keyUp);
+    input.removeEventListener('keydown',keyDown);
+    }
 const pinPriority=()=>{
-    
-    if(priority_pinned===false){
-        PinButton.style.background='crimson';
-        PinButton.style.boxShadow= '-5px -5px inset rgba(100,100,100,.6)';
-        PinButton.style.color= 'white'
+       if(priority_pinned===false){
+        pinButton.style.background='crimson';
+        pinButton.style.borderStyle='inset';
+        // pinButton.style.boxShadow= '-5px -5px inset rgba(100,100,100,.6)';
+        pinButton.style.color= 'white'
         priority_pinned = true;
     }else{
-        PinButton.style.background='whitesmoke';
-        PinButton.style.boxShadow= '';
-        PinButton.style.color= 'maroon';
+        pinButton.style.background='whitesmoke';
+        pinButton.style.borderStyle='outset';
+        // pinButton.style.boxShadow= '';
+        pinButton.style.color= 'maroon';
         priority_pinned = false;
     }
 }
 
 addButton.addEventListener('click',addItem);
 sortButton.addEventListener('click',sortList);
-PinButton.addEventListener('click',pinPriority)
+pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
-input.addEventListener('blur',inputShortCuts);
+input.addEventListener('blur',removeInputShortCuts);
+prioritySelector.onchange=()=>{
+    prioritySelector.style.background=priorityColours[prioritySelector.value];
+    prioritySelector.style.color= (prioritySelector.value===null)?'white':'black';
+}

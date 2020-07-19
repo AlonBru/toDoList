@@ -14,5 +14,35 @@
     border-radius: 50% 0 0 50%;
     background:whitesmoke;
     box-shadow:none;
+    border-style:outset;
     color:maroon;
+}
+.priority-option{
+    color: white;
+    font-weight: bold;
+    border: 4px outset silver;
+}
+.priority-option:hover{
+    background: aliceblue;
+    color: rebeccapurple;
+}
+#priorityNull{
+    background:white;
+    color:black;
+}
+#priority1{
+    background:#009933;
+}
+#priority2{
+    background:#CCAF46;
+}
+#priority3{
+    background:orange;
+}
+#priority4{ 
+    background:red;
+}
+#priority5{
+    background:maroon;
+
 }
