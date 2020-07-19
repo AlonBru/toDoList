@@ -1,7 +1,7 @@
 // elements
 const list= document.getElementById('view');
 const control = document.getElementById('control');
-const input = document.getElementById('inputText');
+const input = document.getElementById('textInput');
 const prioritySelector =document.getElementById('prioritySelector');
 const addButton =document.getElementById('addButton');
 const counter= document.getElementById('counter')
@@ -51,7 +51,7 @@ const addItem=(e)=>{
     item.appendChild(todoTime);
     //counter
     todos.push(item)
-    counter.innerText= `${todos.length} Things To Do`
+    counter.innerText= todos.length
     //reset input fields
     prioritySelector.value=''
     input.value=null;
