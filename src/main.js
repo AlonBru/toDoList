@@ -94,7 +94,7 @@ const keyUp=(e)=>{
     e.preventDefault();
     let lifted= e.which;
     if(heldKeys.includes(lifted)) heldKeys.splice(heldKeys.indexOf(lifted),1);//remove lifted key from heldKeys
-    if(heldKeys.includes(16)){//if shift is held
+    if(heldKeys.includes(18)){//if alt is held
         switch (e.which){
             case 49:
                 prioritySelector.value=1;
@@ -129,7 +129,6 @@ const inputShortCuts=(e)=>{
     input.addEventListener('keydown',keyDown); 
 }
 const removeInputShortCuts=(e)=>{
-    debugger
     input.removeEventListener('keyup',keyUp);
     input.removeEventListener('keydown',keyDown);
     }
@@ -155,6 +154,7 @@ pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
 input.addEventListener('focusout',removeInputShortCuts);
 prioritySelector.onchange=()=>{
+    debugger
     prioritySelector.style.background=priorityColours[prioritySelector.value];
-    prioritySelector.style.color= (prioritySelector.value===null)?'white':'black';
+    prioritySelector.style.color= (prioritySelector.value!=='0')?'white':'black';
 }
