@@ -30,12 +30,13 @@ const create= (name)=>{
         return document.createElement(name);
 }
 const checkField=()=>{
+    
     errorLabel.hidden=true;
     if (input.value===''){
         errorLabel.toggleAttribute('hidden');
         errorLabel.innerText= 'Can\'t create empty task';
         return true;
-    }else if (prioritySelector.value===''){
+    }else if (prioritySelector.value==='0'){
         errorLabel.toggleAttribute('hidden');
         errorLabel.innerText= 'Task Priority must be set';
         return true;
@@ -71,7 +72,7 @@ const addItem=()=>{
     listItems.push(item);
     counter.innerText= listItems.length
     //reset input fields
-    debugger
+    
     if(!priority_pinned){
         prioritySelector.value=0;
         prioritySelector.style.background=priorityColours[prioritySelector.value];
@@ -90,10 +91,10 @@ const sortList=()=>{
     listItems.forEach((x)=>list.appendChild(x));
 }
 const keyUp=(e)=>{
-    
+    e.preventDefault();
     let lifted= e.which;
     if(heldKeys.includes(lifted)) heldKeys.splice(heldKeys.indexOf(lifted),1);//remove lifted key from heldKeys
-    if(heldKeys.includes(17)){//if ctrl is held
+    if(heldKeys.includes(16)){//if shift is held
         switch (e.which){
             case 49:
                 prioritySelector.value=1;
@@ -123,10 +124,12 @@ const keyDown =(e)=>{
     heldKeys.push(down)
 }
 const inputShortCuts=(e)=>{
-    document.addEventListener('keyup',keyUp);
-    document.addEventListener('keydown',keyDown); 
+    
+    input.addEventListener('keyup',keyUp);
+    input.addEventListener('keydown',keyDown); 
 }
 const removeInputShortCuts=(e)=>{
+    debugger
     input.removeEventListener('keyup',keyUp);
     input.removeEventListener('keydown',keyDown);
     }
@@ -150,7 +153,7 @@ addButton.addEventListener('click',addItem);
 sortButton.addEventListener('click',sortList);
 pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
-input.addEventListener('blur',removeInputShortCuts);
+input.addEventListener('focusout',removeInputShortCuts);
 prioritySelector.onchange=()=>{
     prioritySelector.style.background=priorityColours[prioritySelector.value];
     prioritySelector.style.color= (prioritySelector.value===null)?'white':'black';
