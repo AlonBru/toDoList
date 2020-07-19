@@ -73,8 +73,12 @@ const addItem=()=>{
     // sortList();
 }
 const sortList=()=>{
-    debugger
-    listItems= listItems.sort((a,b)=>parseInt(b.getElementsByClassName('todoPriority')[0].innerText)-parseInt(a.getElementsByClassName('todoPriority')[0].innerText))
+    listItems= listItems.sort((a,b)=>{
+        // parseInt(b.getElementsByClassName('todoPriority')[0].innerText)-parseInt(a.getElementsByClassName('todoPriority')[0].innerText))
+        let aVal= parseInt(a.getElementsByClassName('todoPriority')[0].innerText);
+        let bVal= parseInt(b.getElementsByClassName('todoPriority')[0].innerText);
+        return bVal-aVal;
+    })
     list.innerHTML= '';
     listItems.forEach((x)=>list.appendChild(x));
 }
