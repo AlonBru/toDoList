@@ -28,7 +28,7 @@ h1 {
     font-size:large;
     background-color:darkblue ;
     border-radius: 50% 0 0 0/ 50% 0 0 0;
-    grid-row:1/3;
+    grid-row:1/2;
     height:2em;
     margin:0;
 }
@@ -36,7 +36,7 @@ h2 {
     font-size: x-small;
     background-color: royalblue ;
     margin: 0;
-    grid-row: 3/4;
+    grid-row: 2/3;
 }
 #letter{
     color:gold;

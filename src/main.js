@@ -7,6 +7,7 @@ const addButton =document.getElementById('addButton');
 const counter= document.getElementById('counter')
 const errorLabel= document.getElementById('errorLabel')
 const sortButton= document.getElementById('sortButton')
+const doneCounter= document.getElementById('doneCounter')
 const items=()=>{
     const items= [];
     for(let x of document.getElementsByClassName('todoContainer')){
@@ -27,6 +28,7 @@ const time= new Date();
 const year= time.getFullYear();
 const month= (time.getMonth()<9)? '0'+(time.getMonth()+1):time.getMonth()+1;
 const day= time.getDate();
+let doneTasks=0
 const priorityColours= {//colours of priorities
     0:'white',
     1:'#009933',
@@ -74,7 +76,7 @@ const addItem=()=>{
     todoText.className= 'todoText';
     todoText.innerText= input.value;
     item.appendChild(todoText);
-    //mark finished tasks
+    //checkbox
     const todoTick= create('input');
     todoTick.type= 'checkbox';
     todoTick.className= 'todoTick';
@@ -185,17 +187,32 @@ const pinPriority=()=>{
         priority_pinned = false;
     }
 }
-const itemHover=(e)=>{
+const finishTask=(e)=>{
+    debugger
     const target=e.target;
-    if(items().includes(target.parentElement)) target.parentElement.getElementsByClassName('todoText')[0].style.textDecoration= 'line-through';
-    if(items().includes(target))target.getElementsByClassName('todoText')[0].style.textDecoration= 'line-through';
+    const parent=target.parentElement
+    const task=parent.getElementsByClassName('todoText')[0]
+    if (target.className==='todoTick'){
+        if(target.checked){
+            task.style.textDecoration= 'line-through';
+            task.style.textDecorationColor= 'SteelBlue';
+            task.style.color= '#ddd';
+            doneTasks++
+        }else{
+            task.style.textDecoration='';
+            task.style.textDecorationColor='';
+            task.style.color='';
+            doneTasks--
+        }
+        doneCounter.innerText= doneTasks;
+    }
 }
 addButton.addEventListener('click',addItem);
 sortButton.addEventListener('click',sortBy);
 pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
 input.addEventListener('blur',removeInputShortCuts);
-list.addEventListener('click',itemHover)
+list.addEventListener('click',finishTask)
 prioritySelector.onchange=()=>{
     
     prioritySelector.style.background=priorityColours[prioritySelector.value];
