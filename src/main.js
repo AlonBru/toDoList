@@ -74,6 +74,11 @@ const addItem=()=>{
     todoText.className= 'todoText';
     todoText.innerText= input.value;
     item.appendChild(todoText);
+    //mark finished tasks
+    const todoTick= create('input');
+    todoTick.type= 'checkbox';
+    todoTick.className= 'todoTick';
+    item.appendChild(todoTick);
     //time
     const todoTime= create('div');
     todoTime.className= 'todoCreatedAt';
