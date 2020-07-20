@@ -251,10 +251,10 @@ h2 {
     
 }
 /* removes frame when button is a selected */
-button:focus {
+#control button:focus {
     border: 2px solid skyblue;
     outline: 0;
 }
-button:hover{
+#control button:hover{
     border: 2px solid skyblue;
 }
