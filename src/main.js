@@ -65,43 +65,54 @@ const addItem=()=>{//for adding tasks
     const item= create('div');
     list.appendChild(item)
     item.className='todoContainer';
-    const done =create('button');
-    //priority
-    const todoPriority= create('div');
-    todoPriority.className= 'todoPriority';
-    todoPriority.value= prioritySelector.value
-    todoPriority.style.background=priorityColours[prioritySelector.value];
-    todoPriority.innerText= prioritySelector.value;
-    item.appendChild(todoPriority);
-    //text
-    MakeText(input.value,item);
+    addPriority(prioritySelector.value,item)
+    addText(input.value,item);
     //checkbox
+    addTick(item)
     const todoTick= create('input');
     todoTick.type= 'checkbox';
     todoTick.className= 'todoTick';
     item.appendChild(todoTick);
     //time
-    const todoTime= create('div');
-    todoTime.className= 'todoCreatedAt';
-    todoTime.value= new Date;
-    todoTime.innerText= `Added at: ${year}-${month}-${day}`
-    item.appendChild(todoTime);
+    addTime(item);
     //counter
     counter.innerText= items().length
     //reset input fields
-    
     if(!priority_pinned){
         prioritySelector.value=0;
         prioritySelector.style.background=priorityColours[prioritySelector.value];
-    }input.value=null;
+        prioritySelector.style.color='black';
+    }
+    input.value=null;
     input.focus();
     // sortList();
 }
-const MakeText=(input,parent)=>{
+const addPriority=(input,parent)=>{
+    const priority= create('div');
+    priority.className= 'todoPriority';
+    priority.value= input
+    priority.style.background=priorityColours[input];
+    priority.innerText= input;
+    parent.appendChild(priority);
+}
+const addText=(input,parent)=>{
     const text= create('div');
     text.className= 'todoText';
     text.innerText= input;
     parent.appendChild(text);
+}
+const addTick=(parent)=>{
+    const tick= create('input');
+    tick.type= 'checkbox';
+    tick.className= 'todoTick';
+    parent.appendChild(tick);
+}
+const addTime=(parent)=>{
+    const time= create('div');
+    time.className= 'todoCreatedAt';
+    time.value= new Date;
+    time.innerText= `Added at: ${year}-${month}-${day}`
+    parent.appendChild(time);
 }
 
 
