@@ -13,11 +13,19 @@
             <h1><span style="color: gold;">T</span>askList</h1>
             <h2>life, organized </h2>
         </div>
-<!-- SORT button -->
-        <button id='sortButton' name='sortButton' title='Sort tasks by priority'>SORT</button> 
-<!-- counter -->
+<!-- status -->
         <div id='taskStatus'>You currently have <span id='counter'>0</span> tasks on list</div>
         <div id='doneStatus'>of which <span id='doneCounter'>0</span> are marked as completed</div>
+<!-- SORT button -->
+        <div id='sortLabel'>Sort type ☟<br><select id='sortByButton' name='sortByButton' placeholder='sort type'>
+            <option class='sort-option' id='sortPri' default value=pri>by Priority-descending</option>
+            <option class='sort-option' id='sortPri' default value=priR>by Priority-ascending</option>
+            <option class='sort-option' id='sortTime'  value=time>by Time Added-latest last</option>
+            <option class='sort-option' id='sortTime'  value=timeR>by Time Added-latest first</option>
+            <option class='sort-option' id='sortText'  value=text>Alphabetically</option>
+            <option class='sort-option' id='sortText'  value=textR>Alphabetically-reversed</option>
+            </select></div>
+        <button id='sortButton' name='sortButton' title='Sort tasks'>SORT</button> 
 <!-- text input -->
         <input id='textInput' name="textInput" placeholder="e.g Take my towel"> 
 <!-- priority selection -->
@@ -40,7 +48,7 @@
     </div>
     
     <div id='view'>
-        <div class='todoContainer'><div class='todoPriority'>p</div><div class='todoText'>text text text</div><div class='todoCreatedAt'>time time time</div></div>
+        <!-- <div class='todoContainer'><div class='todoPriority'>p</div><div class='todoText'>text text text</div><div class='todoCreatedAt'>time time time</div></div> -->
     </div>
 </body>
 </html>

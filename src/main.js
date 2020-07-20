@@ -7,16 +7,27 @@ const addButton =document.getElementById('addButton');
 const counter= document.getElementById('counter')
 const errorLabel= document.getElementById('errorLabel')
 const sortButton= document.getElementById('sortButton')
-const item= document.getElementsByClassName('todoContainer')
+const items=()=>{
+    const items= [];
+    for(let x of document.getElementsByClassName('todoContainer')){
+        let item =x;
+        let pri = x.getElementsByClassName('todoPriority')[0].value;
+        let text= x.getElementsByClassName('todoText')[0].innerText;
+        let time= x.getElementsByClassName('todoCreatedAt')[0].value;
+       items.push({item,pri,text,time});
+    }
+    return items
+} 
+const sortSelect=document.getElementById('sortByButton')
 const pinButton= document.getElementById('priorityPin')
+
 //useful resources
-let priority_pinned = false;
+let priority_pinned = false;// pin button pressed
 const time= new Date();
 const year= time.getFullYear();
 const month= (time.getMonth()<9)? '0'+(time.getMonth()+1):time.getMonth()+1;
 const day= time.getDate();
-let listItems= [];
-const priorityColours= {
+const priorityColours= {//colours of priorities
     0:'white',
     1:'#009933',
     2:'#DCbF16',
@@ -24,7 +35,7 @@ const priorityColours= {
     4:'crimson',
     5:'maroon'
 }
-const heldKeys=[]
+const heldKeys=[]//keys held down- for keyboard shortcuts
 //functions
 const create= (name)=>{
         return document.createElement(name);
@@ -54,8 +65,8 @@ const addItem=()=>{
     //priority
     const todoPriority= create('div');
     todoPriority.className= 'todoPriority';
+    todoPriority.value= prioritySelector.value
     todoPriority.style.background=priorityColours[prioritySelector.value];
-    // todoPriority.style.border= (prioritySelector.value==='5')? '2px as white':'1px solid black'
     todoPriority.innerText= prioritySelector.value;
     item.appendChild(todoPriority);
     //text
@@ -66,11 +77,11 @@ const addItem=()=>{
     //time
     const todoTime= create('div');
     todoTime.className= 'todoCreatedAt';
+    todoTime.value= new Date;
     todoTime.innerText= `Added at: ${year}-${month}-${day}`
     item.appendChild(todoTime);
     //counter
-    listItems.push(item);
-    counter.innerText= listItems.length
+    counter.innerText= items().length
     //reset input fields
     
     if(!priority_pinned){
@@ -80,15 +91,37 @@ const addItem=()=>{
     input.focus();
     // sortList();
 }
-const sortList=()=>{
-    listItems= listItems.sort((a,b)=>{
-        // parseInt(b.getElementsByClassName('todoPriority')[0].innerText)-parseInt(a.getElementsByClassName('todoPriority')[0].innerText))
-        let aVal= parseInt(a.getElementsByClassName('todoPriority')[0].innerText);
-        let bVal= parseInt(b.getElementsByClassName('todoPriority')[0].innerText);
-        return bVal-aVal;
-    })
+const sortBy=()=>{
+    sortList(sortByButton.value)
+}
+const sortList=(type)=>{
+    let listItems;
+    if(type==='pri'||type==='priR'){
+        listItems= items().sort((a,b)=>{
+            let aVal= parseInt(a.pri);
+            let bVal= parseInt(b.pri);
+            return bVal-aVal;
+        })
+    }
+    if(type==='text'||type==='textR') {
+        listItems= items().sort((a, b)=>{
+            const aVal= a.text.toUpperCase();
+            const bVal=  b.text.toUpperCase();
+            let comparison = (aVal > bVal)?1:-1;
+            return comparison;
+        })
+    }
+    if(type==='time'||type==='timeR'){
+        listItems= items().sort((a, b)=>{
+            const aVal= a.time;
+            const bVal=  b.time;
+            let comparison = (aVal > bVal)?1:-1;
+            return comparison;
+        })
+    }
+    if (type.includes('R'))listItems.reverse()
     list.innerHTML= '';
-    listItems.forEach((x)=>list.appendChild(x));
+    listItems.forEach((x)=>list.appendChild(x.item));
 }
 const keyUp=(e)=>{
     e.preventDefault();
@@ -147,12 +180,17 @@ const pinPriority=()=>{
         priority_pinned = false;
     }
 }
-
+const itemHover=(e)=>{
+    const target=e.target;
+    if(items().includes(target.parentElement)) target.parentElement.getElementsByClassName('todoText')[0].style.textDecoration= 'line-through';
+    if(items().includes(target))target.getElementsByClassName('todoText')[0].style.textDecoration= 'line-through';
+}
 addButton.addEventListener('click',addItem);
-sortButton.addEventListener('click',sortList);
+sortButton.addEventListener('click',sortBy);
 pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
 input.addEventListener('blur',removeInputShortCuts);
+list.addEventListener('click',itemHover)
 prioritySelector.onchange=()=>{
     
     prioritySelector.style.background=priorityColours[prioritySelector.value];
