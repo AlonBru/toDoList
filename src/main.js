@@ -19,9 +19,9 @@ let listItems= [];
 const priorityColours= {
     0:'white',
     1:'#009933',
-    2:'#CCAF46',
-    3:'orange',
-    4:'red',
+    2:'#DCbF16',
+    3:'orangered',
+    4:'crimson',
     5:'maroon'
 }
 const heldKeys=[]
@@ -55,7 +55,7 @@ const addItem=()=>{
     const todoPriority= create('div');
     todoPriority.className= 'todoPriority';
     todoPriority.style.background=priorityColours[prioritySelector.value];
-    todoPriority.style.border= (prioritySelector.value==='5')? '2px as white':'1px solid black'
+    // todoPriority.style.border= (prioritySelector.value==='5')? '2px as white':'1px solid black'
     todoPriority.innerText= prioritySelector.value;
     item.appendChild(todoPriority);
     //text
@@ -152,9 +152,9 @@ addButton.addEventListener('click',addItem);
 sortButton.addEventListener('click',sortList);
 pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
-input.addEventListener('focusout',removeInputShortCuts);
+input.addEventListener('blur',removeInputShortCuts);
 prioritySelector.onchange=()=>{
-    debugger
+    
     prioritySelector.style.background=priorityColours[prioritySelector.value];
     prioritySelector.style.color= (prioritySelector.value!=='0')?'white':'black';
 }
