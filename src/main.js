@@ -60,19 +60,16 @@ const checkField=()=>{//checks if inputs are viable
 
 const addItem=()=>{//for adding tasks
     if (checkField()) return;
-    
     //container
     const item= create('div');
     list.appendChild(item)
     item.className='todoContainer';
+    //Priority
     addPriority(prioritySelector.value,item)
+    //Text
     addText(input.value,item);
     //checkbox
-    addTick(item)
-    const todoTick= create('input');
-    todoTick.type= 'checkbox';
-    todoTick.className= 'todoTick';
-    item.appendChild(todoTick);
+    addTick(false,item)
     //time
     addTime(item);
     //counter
@@ -101,10 +98,11 @@ const addText=(input,parent)=>{
     text.innerText= input;
     parent.appendChild(text);
 }
-const addTick=(parent)=>{
+const addTick=(value,parent)=>{
     const tick= create('input');
     tick.type= 'checkbox';
     tick.className= 'todoTick';
+    tick.value= value;
     parent.appendChild(tick);
 }
 const addTime=(parent)=>{
@@ -207,7 +205,7 @@ const pinPriority=()=>{ //keeps the priority for next input
     }
 }
 const finishTask=(e)=>{ // marks/unmarks finished tasks, updates counter
-    debugger
+    
     const target=e.target;
     const parent=target.parentElement
     const task=parent.getElementsByClassName('todoText')[0]
@@ -248,19 +246,20 @@ const storageInput=document.getElementById('storageInput')
 const storageActions=(e)=>{
     const target= e.target;
     if(target.id==='storage')return;
+    if(target.id==='storageInput')return;
     if(target.id==='clearButton'){
         clearStorage();
         return;
     }else if(!storageInput.value){
-        storageInput.value='Click to enter a file name';
+        storageInput.placeholder='Click to enter a file name';
         return;
     }
     if(target.id==='saveButton'){
         saveStorage();
         return;
     }
-    if(target.id==='loadButton'){
-        loadStorage();
+    if(target.id==='loadButton'||target.id==='appendButton'){
+        loadStorage(target.id);
         return;
     }
     if(target.id==='removeButton'){
@@ -271,7 +270,8 @@ const storageActions=(e)=>{
 
 const saveStorage= ()=>{    
     if(items().length==0){//no list to save
-        storageInput.value='No list to save';
+        storageInput.placeholder='No list to save';
+        storageInput.value='';
         return;
     }
     let file=[];
@@ -283,30 +283,50 @@ const saveStorage= ()=>{
         file.push({pri,text,time,tick});
     }
     localStorage.setItem(storageInput.value,JSON.stringify(file));
-    storageInput.value='saved '+storageInput.value;
+    storageInput.placeholder='saved "'+storageInput.value+'"';
+    storageInput.value='';
 
     }
-const loadStorage= ()=>{
+const loadStorage= (id)=>{
     if(!localStorage.getItem(storageInput.value)){//file doesnt exist
-        storageInput.value='No such file is saved';
+        storageInput.placeholder=`No such file named "${storageInput.value}" is saved`;
+        storageInput.value=''
         return;
     }
     let file= JSON.parse(localStorage.getItem(storageInput.value));
+    if(id==='loadButton')list.innerHTML='';
     for (let x of file){
-        list.appendChild(JSON.parse(x))
+        const item= create('div');
+       list.appendChild(item)
+       item.className='todoContainer';
+       //Priority
+       addPriority(x.pri,item)
+       //Text
+       addText(x.text,item);
+       //checkbox
+       addTick(x.tick,item)
+       //time
+       addTime(item);
+       //counter
+        counter.innerText= items().length
     }
-    storageInput.value='loaded '+storageInput.value;
+    let value=(id==='loadButton')?'loaded ':'appended ';
+    storageInput.placeholder=value+'"'+storageInput.value+'"';
+    storageInput.value='';
     }
 const removeStorage= ()=>{
     if(!localStorage.getItem(storageInput.value)){//file doesnt exist
-        storageInput.value='No such file is saved';
+        storageInput.placeholder=`No file named "${storageInput.value}" is saved`;
+        storageInput.value='';
         return;
     }
     localStorage.removeItem(storageInput.value);
-    storageInput.value='Removed '+storageInput.value;
+    storageInput.placeholder=`Removed "${storageInput.value}"`;
+    storageInput.value='';
     }
 const clearStorage= ()=>{
     localStorage.clear();
-    storageInput.value='Storage Cleared'
+    storageInput.placeholder='Storage Cleared';
+    storageInput.value='';
 }
 storage.addEventListener('click',storageActions)

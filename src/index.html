@@ -9,11 +9,12 @@
 </head>
 <body>
     <div id='storage'>
-        <button id='saveButton'>Save as:</button>
-        <input id='storageInput' type="text" placeholder="Enter list name">
-        <button id="loadButton">Load</button>
-        <button id="removeButton">Remove Save</button>
-        <button id="clearButton">Clear Saves</button>
+        <button id='saveButton' title='Save list under this name'>Save as:</button>
+        <input id='storageInput' type="text" placeholder="Enter file name"title='Name to use for storage'>
+        <button id="loadButton" title='Load list and replace the current list'>Load</button>
+        <button id="appendButton" title='Load list append to current list'>Append</button>
+        <button id="removeButton" title='remove this name from storage'>Remove Save</button>
+        <button id="clearButton" title='clear list storage'>Clear Saves</button>
     </div>
     <hr style="width:100%;text-align:left;margin-left:0">
     <div id='control'>
@@ -37,10 +38,10 @@
 <!-- text input -->
         <input id='textInput' name="textInput" placeholder="e.g Take my towel"> 
 <!-- priority selection -->
-        <button id='priorityPin' title='Keep priority selected'>
-            <div id='pin'>
+        <button id='priorityPin' title='Keep priority selected'>PIN
+            <!-- <div id='pin'>
                     <div id='pinhead'></div> <div id='pinprick'></div> 
-            </div>
+            </div> -->
         </button>
         <select id='prioritySelector' required>
             <option class='priority-option' id='priorityNull' value=0 selected disabled>Set task priority (required)</option>

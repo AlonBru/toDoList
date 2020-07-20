@@ -9,8 +9,7 @@ body{
     gap: 0;
     display: grid;
     height:fit-content;
-    min-width: 500px;
-    max-width: 500px;
+    width: 500px;
     
     grid-template-rows:repeat('1fr' 4);
     grid-template-columns: repeat('1fr' 7);
@@ -27,7 +26,7 @@ h1 {
     color: darkgray;
     font-size:large;
     background-color:darkblue ;
-    /* border-radius: 50% 0 0 0/ 50% 0 0 0; */
+    border-radius: 50% 0 0 0/ 50% 0 0 0;
     grid-row:1/2;
     height:2em;
     margin:0;
@@ -190,23 +189,20 @@ h2 {
     background:maroon;
     
 }
+/* list items */
 #view{
     display: flex;
     flex-direction: column;
-    margin-left: 100px;
-
 }
-/* list items */
 .todoContainer {
-    width:300px;
+    width:500px;
     height: fit-content;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
     display: grid;
-    grid-template-columns: fit-content 1fr 1fr 1fr 1fr 1fr fit-content;
-    grid-template-rows: fit-content fit-content fit-content fit-content;
     left: 50px;
     justify-items: stretch;
+    grid-template-columns: auto;
     
 }
 .todoPriority {
