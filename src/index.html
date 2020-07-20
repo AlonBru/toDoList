@@ -16,23 +16,24 @@
 <!-- SORT button -->
         <button id='sortButton' name='sortButton' title='Sort tasks by priority'>SORT</button> 
 <!-- counter -->
-        <div id=status>
-        <p id='taskStatus'>You currently have <span id='counter'>0</span>tasks on list</p>
-        <p id='doneStatus'>of which <span id='doneCounter'>0</span> are marked as completed</p>
-        <p id='CritStatus'>and <span id='CritCounter'>0</span>of the highest priority</p>
-        </div>
+        <div id='taskStatus'>You currently have <span id='counter'>0</span> tasks on list</div>
+        <div id='doneStatus'>of which <span id='doneCounter'>0</span> are marked as completed</div>
 <!-- text input -->
         <input id='textInput' name="textInput" placeholder="e.g Take my towel" autofocus> 
 <!-- priority selection -->
-            <button id='priorityPin' title='Keep priority selected'>P</button>
-            <select id='prioritySelector' required>
-                <option class='priority-option' id='priorityNull' value=0 selected disabled>Set task priority (required)</option>
-                <option class='priority-option' id='priority1' value=1>1:Least important</option>
-                <option class='priority-option' id='priority2' value=2>2:Somewhat important</option>
-                <option class='priority-option' id='priority3' value=3>3:Moderately important</option>
-                <option class='priority-option' id='priority4' value=4>4:Very important</option>
-                <option class='priority-option' id='priority5' value=5>5:Supremely important </option>
-            </select>
+        <button id='priorityPin' title='Keep priority selected'>
+            <div id='pin'>
+                    <div id='pinhead'></div> <div id='pinprick'></div> 
+            </div>
+        </button>
+        <select id='prioritySelector' required>
+            <option class='priority-option' id='priorityNull' value=0 selected disabled>Set task priority (required)</option>
+            <option class='priority-option' id='priority1' value=1>1:Least important</option>
+            <option class='priority-option' id='priority2' value=2>2:Somewhat important</option>
+            <option class='priority-option' id='priority3' value=3>3:Moderately important</option>
+            <option class='priority-option' id='priority4' value=4>4:Very important</option>
+            <option class='priority-option' id='priority5' value=5>5:Supremely important </option>
+        </select>
 <!-- ADD button -->
         <button id='addButton' name='addButton'>Add task</button>
         <label id='errorLabel' for="addButton"hidden></label>
