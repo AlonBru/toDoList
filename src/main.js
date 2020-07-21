@@ -219,8 +219,9 @@ const finishTask=(e)=>{ // marks/unmarks finished tasks, updates counter
     
     const target=e.target;
     const parent=target.parentElement
-    const task=parent.getElementsByClassName('todoText')[0]
-    if (target.className==='todoTick'){
+    const task=parent.getElementsByClassName('todoText')[0];
+    const className=target.className;
+    if (className==='todoTick'){
         if(target.checked){
             task.style.textDecoration= 'line-through';
             task.style.textDecorationColor= 'SteelBlue';
@@ -232,11 +233,29 @@ const finishTask=(e)=>{ // marks/unmarks finished tasks, updates counter
             task.style.color='';
             doneTasks--
         }
-        doneCounter.innerText= doneTasks;
+    }debugger
+    if(parent.className==='searchResult'){
+        const str= task.innerText;
+        for (let x of items()){
+            const text= x.item.getElementsByClassName('todoText')[0];
+            if(x.text===str){
+                
+                x.item.getElementsByClassName('todoTick')[0].checked= target.checked; 
+                if(target.checked){
+                    text.style.textDecoration= 'line-through';
+                    text.style.textDecorationColor= 'SteelBlue';
+                    text.style.color= '#ddd';
+                }else{
+                    text.style.textDecoration='';
+                    text.style.textDecorationColor='';
+                    text.style.color='';
+                }
+            }
+            }
     }
+    doneCounter.innerText= doneTasks;
 }
 const search=()=>{
-    debugger
     const term=searchBar.value;
     searchError.hidden=true;
     if(term===''){//if input empty
@@ -250,10 +269,10 @@ const search=()=>{
     for(let x of items()){
         console.log('x '+x.text+' X',term);
         if(x.text.includes(term)){
-            const searchResult = x
+            const searchResult = x.item.cloneNode('deep');
             searchResult.className= 'searchResult';
             results.push(searchResult);
-            searchResults.appendChild(searchResult.item)
+            searchResults.appendChild(searchResult)
         }
     }
     if (!results.length>0) searchError.hidden=false;
@@ -265,6 +284,7 @@ pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
 input.addEventListener('blur',removeInputShortCuts);
 list.addEventListener('click',finishTask)
+searchResults.addEventListener('click',finishTask)
 searchBar.addEventListener('input',search)
 prioritySelector.onchange=()=>{
     

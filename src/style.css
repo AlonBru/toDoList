@@ -162,8 +162,20 @@ body{
     height:fit-content;
     width: 500px;
 }
-#searchBar{
-
+#searchResults{
+    display: flex;
+    flex-direction: column;
+    border-top:1px solid black;
+}
+.searchResult{
+background: aliceblue;
+height: fit-content;
+border-bottom: 1px solid black;
+border-right: 1px solid black;
+display: grid;
+left: 50px;
+justify-items: stretch;
+grid-template-columns: auto;
 }
 #searchError{
     align-self: center;
@@ -173,6 +185,7 @@ body{
 #view{
     display: flex;
     flex-direction: column;
+    border-top:1px solid black;
 }
 .todoContainer {
     height: fit-content;
@@ -232,4 +245,8 @@ body{
 }
 #control button:hover{
     border: 2px solid skyblue;
+}
+/* storage */
+#storageContainer{
+    position:relative;
 }
