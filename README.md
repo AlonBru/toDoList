@@ -118,7 +118,12 @@ $ npm run test
  GOOD LUCK!
 
 ## SUBMISSION
--auto Gif
+- auto Gif
+![alt text](./readme-files/ui-testing-recording.gif)
+- couldn't work that GIF command, here's another one (older build)...
 ![alt text](./readme-files/toDo.gif)
--couldn't work that GIF command, here's another one (older build)...
-![alt text](./readme-files/toDo.gif)
+- Deployed [here](https://to-do-list-nine.vercel.app/). it has one visual bug(list won't hide while searching) which is fixed in the pull request. search is case-sensitive
+
+## App Features:
+- Hover explanation for button function
+-

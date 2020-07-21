@@ -1,21 +1,22 @@
-// elements
-const control = document.getElementById('control');
-const input = document.getElementById('textInput');
-const prioritySelector =document.getElementById('prioritySelector');
-const addButton =document.getElementById('addButton');
-const counter= document.getElementById('counter')
-const errorLabel= document.getElementById('errorLabel')
-const doneCounter= document.getElementById('doneCounter')
-const sortButton= document.getElementById('sortButton')
-const sortSelect=document.getElementById('sortByButton')
-const pinButton= document.getElementById('priorityPin')
-const list= document.getElementById('view');
-const searchBar= document.getElementById('searchBar')
-const searchContainer= document.getElementById('searchContainer')
-const searchError= document.getElementById('searchError')
-const searchResults= document.getElementById('searchResults')
-//useful resources
-const items=()=>{
+// --------------elements calls--------------
+const control = document.getElementById('control');//control panel
+const input = document.getElementById('textInput');//input bar
+const prioritySelector =document.getElementById('prioritySelector');//priority selection
+const addButton =document.getElementById('addButton');//ADD button
+const counter= document.getElementById('counter')//status of tasks
+const errorLabel= document.getElementById('errorLabel')//input error display(pop-down)
+const doneCounter= document.getElementById('doneCounter')//status of finished tasks
+const sortButton= document.getElementById('sortButton')//SORT Button
+const sortSelect=document.getElementById('sortByButton')//sort type selection
+const pinButton= document.getElementById('priorityPin')//priority PIN button(📌)
+const list= document.getElementById('view');//task list
+const searchBar= document.getElementById('searchBar')//search bar
+const searchContainer= document.getElementById('searchContainer')//search container
+const searchError= document.getElementById('searchError')//search error message
+const searchResults= document.getElementById('searchResults')// search results list
+
+//--------------useful resources--------------
+const items=()=>{//used for accessing list items and their information
     const items=[]
     for(let x of document.getElementsByClassName('todoContainer')){
         let item =x;
@@ -27,14 +28,15 @@ const items=()=>{
     }
     return items
 } 
-    let priority_pinned = false;// pin button pressed
+let priority_pinned = false;// pin button pressed
+let doneTasks=0//number of tasks marked as done
+//time functions
 const time= new Date();
 const year= time.getFullYear();
 const month= (time.getMonth()<9)?
     '0'+(time.getMonth()+1):time.getMonth()+1;
 const day= time.getDate();
-let doneTasks=0
-const priorityColours= {//colours of priorities
+const priorityColours= {//colours code of priorities
     0:'white',
     1:'#009933',
     2:'#DCbF16',
@@ -43,24 +45,12 @@ const priorityColours= {//colours of priorities
     5:'maroon'
 }
 const heldKeys=[]//keys held down- for keyboard shortcuts
-//functions
+
+//--------------functions--------------
+//functions for creating elements
 const create= (name)=>{//creating new element
         return document.createElement(name);
 }
-const checkField=()=>{//checks if inputs are viable
-    
-    errorLabel.hidden=true;
-    if (input.value===''){
-        errorLabel.toggleAttribute('hidden');
-        errorLabel.innerText= 'Can\'t create empty task';
-        return true;
-    }else if (prioritySelector.value==='0'){
-        errorLabel.toggleAttribute('hidden');
-        errorLabel.innerText= 'Task Priority must be set';
-        return true;
-    }else {return false;}
-}
-
 const addItem=()=>{//for adding tasks
     if (checkField()) return;
     //container
@@ -123,13 +113,24 @@ const addTime=(parent)=>{
     time.innerText= `Added at: ${year}-${month}-${day}`
     parent.appendChild(time);
 }
-
-
-
-const sortBy=()=>{//sorting
+//general app functions
+const checkField=()=>{//checks if inputs are viable
+    
+    errorLabel.hidden=true;
+    if (input.value===''){
+        errorLabel.toggleAttribute('hidden');
+        errorLabel.innerText= 'Can\'t create empty task';
+        return true;
+    }else if (prioritySelector.value==='0'){
+        errorLabel.toggleAttribute('hidden');
+        errorLabel.innerText= 'Task Priority must be set';
+        return true;
+    }else {return false;}
+}
+const sortBy=()=>{//sort direct
     sortList(sortByButton.value)
 }
-const sortList=(type)=>{
+const sortList=(type)=>{//sorting
     let listItems;
     if(type==='pri'||type==='priR'){
         listItems= items().sort((a,b)=>{
@@ -184,8 +185,7 @@ const keyUp=(e)=>{//for keyboard shortcuts
         }           
     }
 }
-
-const keyDown =(e)=>{//updates heldKeys
+const keyDown =(e)=>{//updates heldKeys for shortcuts
     const down=e.which;
     if (e.which===13) addButton.click();
     if(heldKeys.includes(down))return;
@@ -200,7 +200,7 @@ const removeInputShortCuts=(e)=>{ //disables input keyboard shortcuts
     input.removeEventListener('keyup',keyUp);
     input.removeEventListener('keydown',keyDown);
     }
-const pinPriority=()=>{ //keeps the priority for next input
+const pinPriority=()=>{ //pin button function
        if(priority_pinned===false){
         pinButton.style.background='crimson';
         pinButton.style.borderStyle='inset';
@@ -255,7 +255,7 @@ const finishTask=(e)=>{ // marks/unmarks finished tasks, updates counter
     }
     doneCounter.innerText= doneTasks;
 }
-const search=()=>{
+const search=()=>{//updates search results
     const term=searchBar.value;
     searchError.hidden=true;
     if(term===''){//if input empty
@@ -268,7 +268,7 @@ const search=()=>{
     searchResults.innerText='';
     for(let x of items()){
         console.log('x '+x.text+' X',term);
-        if(x.text.includes(term)){
+        if(x.text.toLowerCase().includes(term.toLowerCase())){
             const searchResult = x.item.cloneNode('deep');
             searchResult.className= 'searchResult';
             results.push(searchResult);
@@ -278,29 +278,30 @@ const search=()=>{
     if (!results.length>0) searchError.hidden=false;
 
 }
-addButton.addEventListener('click',addItem);
-sortButton.addEventListener('click',sortBy);
-pinButton.addEventListener('click',pinPriority)
-input.addEventListener('focus',inputShortCuts);
-input.addEventListener('blur',removeInputShortCuts);
-list.addEventListener('click',finishTask)
-searchResults.addEventListener('click',finishTask)
-searchBar.addEventListener('input',search)
-prioritySelector.onchange=()=>{
+//--------------event listeners--------------
+addButton.addEventListener('click',addItem);//add button
+sortButton.addEventListener('click',sortBy);//sort button
+pinButton.addEventListener('click',pinPriority)//pin button
+input.addEventListener('focus',inputShortCuts);//input focus (for shortcuts)
+input.addEventListener('blur',removeInputShortCuts);//input un-focus(for shortcuts)
+list.addEventListener('click',finishTask)//item checkboxes
+searchResults.addEventListener('click',finishTask)//search results checkboxes
+searchBar.addEventListener('input',search)//searching
+prioritySelector.oninput=()=>{//meant to change the color on priority selector, somewhat broken
     
     prioritySelector.style.background=priorityColours[prioritySelector.value];
     prioritySelector.style.color= (prioritySelector.value!=='0')?'white':'black';
 }
-//save features----------------------------------------------------------------
+//storage features----------------------------------------------------------------
+//--------------Storage element callers--------------
 const storage=document.getElementById('storage')
 const saveButton=document.getElementById('saveButton')
 const loadButton=document.getElementById('loadButton')
 const removeButton=document.getElementById('removeButton')
 const clearButton=document.getElementById('clearButton')
 const storageInput=document.getElementById('storageInput')
-
-
-const storageActions=(e)=>{
+//--------------Storage functions--------------
+const storageActions=(e)=>{ redirecton
     const target= e.target;
     if(target.id==='storage')return;
     if(target.id==='storageInput')return;
@@ -324,8 +325,7 @@ const storageActions=(e)=>{
         return;
     }
 }
-
-const saveStorage= ()=>{    
+const saveStorage= ()=>{//saving
     if(items().length==0){//no list to save
         storageInput.placeholder='No list to save';
         storageInput.value='';
@@ -345,7 +345,7 @@ const saveStorage= ()=>{
     storageInput.value='';
 
     }
-const loadStorage= (id)=>{
+const loadStorage= (id)=>{//loading\appending load
     if(!localStorage.getItem(storageInput.value)){//file doesn't exist
         storageInput.placeholder=`No such file named "${storageInput.value}" is saved`;
         storageInput.value=''
@@ -373,7 +373,7 @@ const loadStorage= (id)=>{
     storageInput.placeholder=value+'"'+storageInput.value+'"';
     storageInput.value='';
     }
-const removeStorage= ()=>{
+const removeStorage= ()=>{//remove storage items
     if(!localStorage.getItem(storageInput.value)){//file doesn't exist
         storageInput.placeholder=`No file named "${storageInput.value}" is saved`;
         storageInput.value='';
@@ -383,9 +383,11 @@ const removeStorage= ()=>{
     storageInput.placeholder=`Removed "${storageInput.value}"`;
     storageInput.value='';
     }
-const clearStorage= ()=>{
+const clearStorage= ()=>{//clear storage completely
     localStorage.clear();
     storageInput.placeholder='Storage Cleared';
     storageInput.value='';
 }
+//--------------Storage event listeners--------------
 storage.addEventListener('click',storageActions)
+
