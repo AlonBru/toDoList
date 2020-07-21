@@ -114,4 +114,57 @@ $ npm run test
  - add Github usernames: GuySerfaty, fainir and tomeryp as [collaborators](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/inviting-collaborators-to-a-personal-repository) to your imported repo.
  - Add link to the PR you created in your private repo [here](https://docs.google.com/spreadsheets/d/1P9_YDGqIqmV10fvTmIXc_AGV0_ycI2aBFo2h5zprUMI/edit#gid=1903529310), fill the other details
 
+
  GOOD LUCK!
+
+## SUBMISSION
+- intro [video](https://drive.google.com/file/d/1EAt_Auwv0jW-WlAiQpT1tCJ5XD7Or-j9/view?usp=sharing) 
+- auto Gif
+![alt text](./readme-files/ui-testing-recording.gif)
+- couldn't work that GIF command, here's another one (older build)...
+![alt text](./readme-files/toDo.gif)
+- Deployed on Vercel [here](https://todo-alonbru.vercel.app/). I recommend zooming in a bit, I've mad the UI a bit small but it seems to scale alright. 
+
+
+## TaskList app Features:
+- Hover explanation for button function
+- Color-coded Priorities
+- Keyboard shortcuts while in input:
+ - alt+1,2,3,4,5 to set priority
+ - enter to add
+- Priority PIN (📌) button for quick repeated inputs
+- Sorting list items by:
+ - Priority (default)
+ - Time added
+ - Alphabetically
+ - All methods have both ascending and descending orders
+- Marking finished tasks
+- Keeps track of how many tasks tasks yoh have, finished
+- Search and mark tasks
+- Storage functions:
+  - Save lists
+  - View saved lists
+  - Load lists (as a new list or an addition)
+  - Storage clearing (single and bulk)
+- Works well enough on mobile
+
+ ## TaskList MO:
+### Guiding principles:
+- Mostly all function based:
+   User input calls functions which call other functions they requires
+- Visually oriented design:
+  Designed to be as intuitive as possible, using color coding and [Skeuomorphs](https://en.wikipedia.org/wiki/Skeuomorph) (buttons look like)
+- Readability:
+  Code designed to be easily read and debugged.
+
+- items() function:
+  - Most calls dor list items and their data go through the items() function
+  - items() is a function and not an array or variable, so it gets fresh, up to date data every time it is called and does not need manual updating.
+- UI is separated into 4 parts:
+  - Control panel housing User inputs
+  - Search area which handles searches
+  - List area to view, interact with tasks
+  - storage area for storage functions
+- Hover explanations:
+  - When the mouse points on a UI element, it displays text.
+  - This text provides a brief explanation for what the button does.

@@ -1,0 +1,305 @@
+/* General */
+body{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width:500px;
+}
+/* control */
+#control{
+    gap: 0;
+    display: grid;
+    height:fit-content;
+    width: 500px;
+    grid-template-columns: auto;
+}
+/* title */
+#title {
+    display: grid;
+    grid-row: 1/3;
+    grid-column: 1/3;
+    text-align: center;
+    margin:0;
+} 
+#h1div {
+    color: silver;
+    font-size: x-small;
+    background-color: darkblue;
+    border-radius: 50% 0 0 0/ 50% 0 0 0;
+    grid-row: 1/2;
+    
+}
+#h2div {
+    font-size: 8px;
+    background-color: royalblue;
+    margin: 0;
+    grid-row: 2/3;
+    justify-content: space-around;
+}
+
+#letter{
+    color:gold;
+}
+/* status */
+
+#taskStatus{
+    border-left: 5px solid orange;
+    border-top:2px solid;
+    border-right:1px solid;
+    grid-row:1/2;
+    padding-left: 5px;
+    width: fit-content;
+}
+#doneStatus{
+    border-top:1px solid;
+    border-left: 5px solid #0f0;
+    border-right:1px solid;
+    align-self: bottom;
+    grid-row:2/3;
+    padding-left: 5px;
+    width: fit-content;
+}
+/* input */
+#textInput{
+    grid-row: 3/4;
+    grid-column: 3/7;
+}
+#prioritySelector{
+    grid-row: 4/5;
+    grid-column: 3/7;
+}
+/* pin button */
+#priorityPin {
+    grid-row: 3/5;
+    grid-column: 1/3;
+    /* border-radius: 0% 0% 0 50%; */
+    background: whitesmoke;
+    box-shadow: none;
+    border-style: none none outset outset;
+    color: maroon;
+}
+/* ADD and SORT buttons */
+#errorLabel{
+    position: relative;
+    border-radius: 0 0 50% 50%/0 0 50% 50%;
+    background-color: #a32 ;
+    color:white;
+    font-weight: bolder;
+    grid-row:5/6;
+    grid-column:3/7;
+    text-align: center;
+    z-index: 10;
+}
+#addButton{
+    border-width: 2px;
+    grid-row:3/5;
+    grid-column:7/8;
+    padding-bottom:10% ;
+    font-size: medium;
+    text-align: left;    
+}
+#sortButton{
+    word-wrap: break-word;
+    border-top-right-radius:90%;
+    text-align: left;
+    grid-row:1/3;
+    grid-column:7/8;
+}
+#sortLabel{
+    border-top: 2px solid;
+    text-align: center;
+    grid-row: 1/3;
+    grid-column: 6/7;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+}
+#sortByButton{
+    max-width: min-content;
+    
+}
+/* priority selector options */
+.todoPriority{
+    background:black;
+    color:white;
+    font-weight: bold;
+    width: 20px;
+    height:20px;
+    margin:0;
+}
+
+.priority-option{
+    color: white;
+    font-weight: bold;
+    border: 4px outset silver;
+}
+.priority-option:hover{
+    background: aliceblue;
+    color: rebeccapurple;
+}
+#priorityNull{
+    background:white;
+    color:black;
+}
+#priority1 {
+    background:#009933;
+}
+#priority2 {
+    background:#DCbF16;
+}
+#priority3 {
+    background:orangered;
+}
+#priority4 { 
+    background:crimson;
+}
+#priority5 {
+    background:maroon;
+    
+}
+/* search bar */
+#searchContainer{
+    display: flex;
+    flex-direction: column;
+    height:fit-content;
+    width: 500px;
+}
+#searchResults{
+    display: flex;
+    flex-direction: column;
+    border-top:1px solid black;
+}
+.searchResult{
+background: aliceblue;
+height: fit-content;
+border-bottom: 1px solid black;
+border-right: 1px solid black;
+display: grid;
+left: 50px;
+justify-items: stretch;
+grid-template-columns: auto;
+}
+#searchError{
+    align-self: center;
+    color: crimson;
+}
+/* list items */
+#view{
+    display: flex;
+    flex-direction: column;
+    border-top:1px solid black;
+}
+.todoContainer {
+    height: fit-content;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    display: grid;
+    left: 50px;
+    justify-items: stretch;
+    grid-template-columns: auto;
+    
+}
+.todoPriority {
+    grid-area: pri;
+    grid-column: 1/2;
+    grid-row: 1/5;
+    height:auto;
+    align-content: center;
+    text-align: center;
+    font-size: xx-large;
+
+    
+}
+.todoText{
+    grid-area: text;
+    grid-column: 2/7;
+    grid-row: 1/3;
+    display:flex;
+    flex-direction: row;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    align-self: center;
+    margin-left: 5px;
+    text-decoration: wavy;
+}
+.todoCreatedAt{
+    grid-area: time;
+    grid-column: 2/7;
+    grid-row: 3/5;
+    display:flex;
+    flex-direction: row;
+    align-self: center;
+    justify-self:end;
+    
+    
+}
+.todoTick{
+    grid-area: tick;
+    grid-column: 7/8;
+    grid-row: 2/4;
+    justify-self:center;
+    
+}
+/* removes frame when button is a selected */
+#control button:focus {
+    border: 2px solid skyblue;
+    outline: 0;
+}
+#control button:hover{
+    border: 2px solid skyblue;
+}
+/* storage */
+#storage{
+    display: grid;
+}
+#saveButton{
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+#storageInput{
+    grid-row: 1/2;
+    grid-column: 2/3;
+    
+}
+#loadButton{
+    grid-row: 1/2;
+    grid-column: 3/4;
+    
+}
+#appendButton{
+    grid-row: 1/2;
+    grid-column: 4/5;
+    
+}
+#removeButton{
+    grid-row: 1/2;
+    grid-column: 5/6;
+    
+}
+#clearButton{
+    grid-row: 2/2;
+    grid-column: 5/6;
+
+}
+#storageNames{
+    height: fit-content;
+    grid-row: 2/2;
+    grid-column: 2/4;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    border: 1px solid black;
+    background: gray;
+}
+#storageError{
+    margin:0;
+    visibility: hidden;
+    color:crimson;
+}
+.keyName{
+    border: 1px solid black;
+    background: gray;
+}
+.keyName:hover{
+background: skyblue;
+}
