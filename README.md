@@ -122,7 +122,7 @@ $ npm run test
 ![alt text](./readme-files/ui-testing-recording.gif)
 - couldn't work that GIF command, here's another one (older build)...
 ![alt text](./readme-files/toDo.gif)
-- Deployed on Vercel [here](https://todo-alonbru.vercel.app/).
+- Deployed on Vercel [here](https://todo-alonbru.vercel.app/). I recommend zooming in a bit, I've mad the UI a bit small but it seems to scale alright.  
 
 ## TaskList app Features:
 - Hover explanation for button function
@@ -145,8 +145,14 @@ $ npm run test
  - storage clearing (single and bulk)
 
  ## TaskList MO:
- - Mostly all function based:
-   User input calls function which call other function it requires
+### Guiding principles:
+- Mostly all function based:
+   User input calls functions which call other functions they requires
+- Visually oriented design:
+  Designed to be as intuitive as possible, using color coding and [Skeuomorphs](https://en.wikipedia.org/wiki/Skeuomorph)
+- Readability:
+  Code designed to be easily read and debugged.
+
 - items() function:
   - Most calls dor list items and their data go through the items() function
   - items() is a function and not an array or variable, so it gets fresh, up to date data every time it is called and does not need manual updating.
@@ -156,6 +162,5 @@ $ npm run test
   - List area to view, interact with tasks
   - storage area for storage functions
 - Hover explanations:
- - When the mouse points on a UI element, it displays text.
- - This text provides a brief explanation for what the button does.
-- Visually oriented design
+  - When the mouse points on a UI element, it displays text.
+  - This text provides a brief explanation for what the button does.
