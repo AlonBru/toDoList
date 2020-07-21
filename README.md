@@ -118,11 +118,13 @@ $ npm run test
  GOOD LUCK!
 
 ## SUBMISSION
+- intro [video](https://drive.google.com/file/d/1EAt_Auwv0jW-WlAiQpT1tCJ5XD7Or-j9/view?usp=sharing) 
 - auto Gif
 ![alt text](./readme-files/ui-testing-recording.gif)
 - couldn't work that GIF command, here's another one (older build)...
 ![alt text](./readme-files/toDo.gif)
-- Deployed on Vercel [here](https://todo-alonbru.vercel.app/). I recommend zooming in a bit, I've mad the UI a bit small but it seems to scale alright.  
+- Deployed on Vercel [here](https://todo-alonbru.vercel.app/). I recommend zooming in a bit, I've mad the UI a bit small but it seems to scale alright. 
+
 
 ## TaskList app Features:
 - Hover explanation for button function
@@ -144,6 +146,7 @@ $ npm run test
   - View saved lists
   - Load lists (as a new list or an addition)
   - Storage clearing (single and bulk)
+- Works well enough on mobile
 
  ## TaskList MO:
 ### Guiding principles:
