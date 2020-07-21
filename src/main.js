@@ -263,7 +263,7 @@ const search=()=>{
         list.style.visibility='';
         return;
     }
-    // list.style.visibility='hidden';
+    list.style.visibility='hidden';
     const results=[]
     searchResults.innerText='';
     for(let x of items()){
