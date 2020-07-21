@@ -122,8 +122,40 @@ $ npm run test
 ![alt text](./readme-files/ui-testing-recording.gif)
 - couldn't work that GIF command, here's another one (older build)...
 ![alt text](./readme-files/toDo.gif)
-- Deployed [here](https://to-do-list-nine.vercel.app/). it has one visual bug(list won't hide while searching) which is fixed in the pull request. search is case-sensitive
+- Deployed on Vercel [here](https://todo-alonbru.vercel.app/).
 
-## App Features:
+## TaskList app Features:
 - Hover explanation for button function
--
+- Color-coded Priorities
+- Keyboard shortcuts while in input:
+ - alt+1,2,3,4,5 to set priority
+ - enter to add
+- Priority PIN (📌) button for quick repeated inputs
+- Sorting list items by:
+ - Priority (default)
+ - Time added
+ - Alphabetically
+ - All methods have both ascending and descending orders
+- Marking finished tasks
+- Keeps track of how many tasks tasks yoh have, finished
+- Search and mark tasks
+- storage functions:
+ - save lists
+ - load lists (as a new list or an addition)
+ - storage clearing (single and bulk)
+
+ ## TaskList MO:
+ - Mostly all function based:
+   User input calls function which call other function it requires
+- items() function:
+  - Most calls dor list items and their data go through the items() function
+  - items() is a function and not an array or variable, so it gets fresh, up to date data every time it is called and does not need manual updating.
+- UI is separated into 4 parts:
+  - Control panel housing User inputs
+  - Search area which handles searches
+  - List area to view, interact with tasks
+  - storage area for storage functions
+- Hover explanations:
+ - When the mouse points on a UI element, it displays text.
+ - This text provides a brief explanation for what the button does.
+- Visually oriented design
