@@ -139,17 +139,18 @@ $ npm run test
 - Marking finished tasks
 - Keeps track of how many tasks tasks yoh have, finished
 - Search and mark tasks
-- storage functions:
- - save lists
- - load lists (as a new list or an addition)
- - storage clearing (single and bulk)
+- Storage functions:
+  - Save lists
+  - View saved lists
+  - Load lists (as a new list or an addition)
+  - Storage clearing (single and bulk)
 
  ## TaskList MO:
 ### Guiding principles:
 - Mostly all function based:
    User input calls functions which call other functions they requires
 - Visually oriented design:
-  Designed to be as intuitive as possible, using color coding and [Skeuomorphs](https://en.wikipedia.org/wiki/Skeuomorph)
+  Designed to be as intuitive as possible, using color coding and [Skeuomorphs](https://en.wikipedia.org/wiki/Skeuomorph) (buttons look like)
 - Readability:
   Code designed to be easily read and debugged.
 

@@ -233,7 +233,7 @@ const finishTask=(e)=>{ // marks/unmarks finished tasks, updates counter
             task.style.color='';
             doneTasks--
         }
-    }debugger
+    }
     if(parent.className==='searchResult'){
         const str= task.innerText;
         for (let x of items()){
@@ -300,8 +300,10 @@ const loadButton=document.getElementById('loadButton')
 const removeButton=document.getElementById('removeButton')
 const clearButton=document.getElementById('clearButton')
 const storageInput=document.getElementById('storageInput')
+const storageNames=document.getElementById('storageNames')
+const storageError=document.getElementById('storageError')
 //--------------Storage functions--------------
-const storageActions=(e)=>{ redirecton
+const storageActions=(e)=>{//redirection
     const target= e.target;
     if(target.id==='storage')return;
     if(target.id==='storageInput')return;
@@ -388,6 +390,38 @@ const clearStorage= ()=>{//clear storage completely
     storageInput.placeholder='Storage Cleared';
     storageInput.value='';
 }
+const searchStorage=()=>{//shows available files
+    storageNames.style.visibility= 'visible';
+    storageError.style.visibility= 'hidden';
+    const saved=[]
+    const keys= Object.entries(localStorage);
+    storageNames.innerText='';
+    for(let x of keys){
+        const key = x[0]
+        saved.push(key)
+        const keyName=create('div')
+        keyName.innerText=key;
+        keyName.className= 'keyName';
+        keyName.title=`a list named "${key}" is saved to storage`
+        storageNames.appendChild(keyName);
+    }
+    debugger
+    if (!saved.length>0) storageError.style.visibility= 'visible';
+
+}
+const pickKey=(e)=>{
+    debugger
+    const target=e.target
+    storageInput.value=target.innerText
+}
+const hideKeys=(e)=>{
+    if (e.target.value) return;
+    storageNames.style.visibility='hidden';
+}
 //--------------Storage event listeners--------------
 storage.addEventListener('click',storageActions)
+storageInput.addEventListener('input',searchStorage)//searching
+storageInput.addEventListener('blur',hideKeys)
+storageNames.addEventListener('click',pickKey)
+
 

@@ -47,8 +47,8 @@ body{
     border-top:2px solid;
     border-right:1px solid;
     grid-row:1/2;
+    padding-left: 5px;
     width: fit-content;
-    
 }
 #doneStatus{
     border-top:1px solid;
@@ -56,6 +56,7 @@ body{
     border-right:1px solid;
     align-self: bottom;
     grid-row:2/3;
+    padding-left: 5px;
     width: fit-content;
 }
 /* input */
@@ -90,12 +91,12 @@ body{
     z-index: 10;
 }
 #addButton{
+    border-width: 2px;
     grid-row:3/5;
     grid-column:7/8;
     padding-bottom:10% ;
     font-size: medium;
-    text-align: left;
-    /* border-bottom-right-radius:90% ; */
+    text-align: left;    
 }
 #sortButton{
     word-wrap: break-word;
@@ -106,6 +107,7 @@ body{
 }
 #sortLabel{
     border-top: 2px solid;
+    text-align: center;
     grid-row: 1/3;
     grid-column: 6/7;
     justify-content: space-evenly;
@@ -247,6 +249,57 @@ grid-template-columns: auto;
     border: 2px solid skyblue;
 }
 /* storage */
-#storageContainer{
-    position:relative;
+#storage{
+    display: grid;
+}
+#saveButton{
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+#storageInput{
+    grid-row: 1/2;
+    grid-column: 2/3;
+    
+}
+#loadButton{
+    grid-row: 1/2;
+    grid-column: 3/4;
+    
+}
+#appendButton{
+    grid-row: 1/2;
+    grid-column: 4/5;
+    
+}
+#removeButton{
+    grid-row: 1/2;
+    grid-column: 5/6;
+    
+}
+#clearButton{
+    grid-row: 2/2;
+    grid-column: 5/6;
+
+}
+#storageNames{
+    height: fit-content;
+    grid-row: 2/2;
+    grid-column: 2/4;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    border: 1px solid black;
+    background: gray;
+}
+#storageError{
+    margin:0;
+    visibility: hidden;
+    color:crimson;
+}
+.keyName{
+    border: 1px solid black;
+    background: gray;
+}
+.keyName:hover{
+background: skyblue;
 }
