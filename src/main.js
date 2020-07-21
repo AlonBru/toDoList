@@ -7,24 +7,27 @@ const counter= document.getElementById('counter')
 const errorLabel= document.getElementById('errorLabel')
 const doneCounter= document.getElementById('doneCounter')
 const sortButton= document.getElementById('sortButton')
+const sortSelect=document.getElementById('sortByButton')
+const pinButton= document.getElementById('priorityPin')
+const list= document.getElementById('view');
+const searchBar= document.getElementById('searchBar')
+const searchContainer= document.getElementById('searchContainer')
+const searchError= document.getElementById('searchError')
+const searchResults= document.getElementById('searchResults')
+//useful resources
 const items=()=>{
-    const items= [];
+    const items=[]
     for(let x of document.getElementsByClassName('todoContainer')){
         let item =x;
         let pri = x.getElementsByClassName('todoPriority')[0].value;
-        let text= x.getElementsByClassName('todoText')[0].innerText;
+        let text= x.getElementsByClassName('todoText')[0].value;
         let time= x.getElementsByClassName('todoCreatedAt')[0].value;
         let tick= x.getElementsByClassName('todoTick')[0].checked;
         items.push({item,pri,text,time,tick});
     }
     return items
 } 
-const sortSelect=document.getElementById('sortByButton')
-const pinButton= document.getElementById('priorityPin')
-const list= document.getElementById('view');
-
-//useful resources
-let priority_pinned = false;// pin button pressed
+    let priority_pinned = false;// pin button pressed
 const time= new Date();
 const year= time.getFullYear();
 const month= (time.getMonth()<9)?
@@ -96,13 +99,21 @@ const addText=(input,parent)=>{
     const text= create('div');
     text.className= 'todoText';
     text.innerText= input;
+    text.value= input;
     parent.appendChild(text);
 }
 const addTick=(value,parent)=>{
     const tick= create('input');
     tick.type= 'checkbox';
     tick.className= 'todoTick';
-    tick.value= value;
+    tick.checked= value;
+    if (value===true){
+        const task=parent.getElementsByClassName('todoText')[0]
+        task.style.textDecoration= 'line-through';
+        task.style.textDecorationColor= 'SteelBlue';
+        task.style.color= '#ddd';
+        doneTasks++
+    }
     parent.appendChild(tick);
 }
 const addTime=(parent)=>{
@@ -224,12 +235,37 @@ const finishTask=(e)=>{ // marks/unmarks finished tasks, updates counter
         doneCounter.innerText= doneTasks;
     }
 }
+const search=()=>{
+    debugger
+    const term=searchBar.value;
+    searchError.hidden=true;
+    if(term===''){//if input empty
+        searchResults.innerHTML='';
+        list.style.visibility='';
+        return;
+    }
+    // list.style.visibility='hidden';
+    const results=[]
+    searchResults.innerText='';
+    for(let x of items()){
+        console.log('x '+x.text+' X',term);
+        if(x.text.includes(term)){
+            const searchResult = x
+            searchResult.className= 'searchResult';
+            results.push(searchResult);
+            searchResults.appendChild(searchResult.item)
+        }
+    }
+    if (!results.length>0) searchError.hidden=false;
+
+}
 addButton.addEventListener('click',addItem);
 sortButton.addEventListener('click',sortBy);
 pinButton.addEventListener('click',pinPriority)
 input.addEventListener('focus',inputShortCuts);
 input.addEventListener('blur',removeInputShortCuts);
 list.addEventListener('click',finishTask)
+searchBar.addEventListener('input',search)
 prioritySelector.onchange=()=>{
     
     prioritySelector.style.background=priorityColours[prioritySelector.value];
@@ -242,6 +278,7 @@ const loadButton=document.getElementById('loadButton')
 const removeButton=document.getElementById('removeButton')
 const clearButton=document.getElementById('clearButton')
 const storageInput=document.getElementById('storageInput')
+
 
 const storageActions=(e)=>{
     const target= e.target;
@@ -282,21 +319,22 @@ const saveStorage= ()=>{
         let tick= x.tick
         file.push({pri,text,time,tick});
     }
+    console.log('save '+file);
     localStorage.setItem(storageInput.value,JSON.stringify(file));
     storageInput.placeholder='saved "'+storageInput.value+'"';
     storageInput.value='';
 
     }
 const loadStorage= (id)=>{
-    if(!localStorage.getItem(storageInput.value)){//file doesnt exist
+    if(!localStorage.getItem(storageInput.value)){//file doesn't exist
         storageInput.placeholder=`No such file named "${storageInput.value}" is saved`;
         storageInput.value=''
         return;
     }
     let file= JSON.parse(localStorage.getItem(storageInput.value));
+    console.log('load '+file);
     if(id==='loadButton')list.innerHTML='';
     for (let x of file){
-        debugger
         const item= create('div');
        list.appendChild(item)
        item.className='todoContainer';
@@ -305,7 +343,7 @@ const loadStorage= (id)=>{
        //Text
        addText(x.text,item);
        //checkbox
-       addTick(x.tick,item)
+       addTick(x.tick,item);
        //time
        addTime(item);
        //counter
@@ -316,7 +354,7 @@ const loadStorage= (id)=>{
     storageInput.value='';
     }
 const removeStorage= ()=>{
-    if(!localStorage.getItem(storageInput.value)){//file doesnt exist
+    if(!localStorage.getItem(storageInput.value)){//file doesn't exist
         storageInput.placeholder=`No file named "${storageInput.value}" is saved`;
         storageInput.value='';
         return;

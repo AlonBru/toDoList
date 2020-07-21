@@ -8,24 +8,15 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id='storage'>
-        <button id='saveButton' title='Save list under this name'>Save as:</button>
-        <input id='storageInput' type="text" placeholder="Enter file name"title='Name to use for storage'>
-        <button id="loadButton" title='Load list and replace the current list'>Load</button>
-        <button id="appendButton" title='Load list append to current list'>Append</button>
-        <button id="removeButton" title='remove this name from storage'>Remove Save</button>
-        <button id="clearButton" title='clear list storage'>Clear Saves</button>
-    </div>
-    <hr style="width:100%;text-align:left;margin-left:0">
     <div id='control'>
         <div id='title'>
             <div id="h1div"><h1>TaskList</h1></div>
             <div id="h2div"><h2>life, organized </h2></div>
         </div>
-<!-- status -->
+        <!-- status -->
         <div id='taskStatus'>You currently have <span id='counter'>0</span> tasks on list</div>
         <div id='doneStatus'>of which <span id='doneCounter'>0</span> are marked as completed</div>
-<!-- SORT button -->
+        <!-- SORT button -->
         <div id='sortLabel'>Sort type ☟<br><select id='sortByButton' name='sortByButton' placeholder='sort type'>
             <option class='sort-option' id='sortPri' default value=pri>Priority-descending</option>
             <option class='sort-option' id='sortPri' default value=priR>Priority-ascending</option>
@@ -33,11 +24,11 @@
             <option class='sort-option' id='sortTime'  value=timeR>Time Added-latest first</option>
             <option class='sort-option' id='sortText'  value=text>Alphabetically</option>
             <option class='sort-option' id='sortText'  value=textR>Alphabetically-reversed</option>
-            </select></div>
+        </select></div>
         <button id='sortButton' name='sortButton' title='Sort tasks'>SORT</button> 
-<!-- text input -->
+        <!-- text input -->
         <input id='textInput' name="textInput" placeholder="e.g Take my towel"> 
-<!-- priority selection -->
+        <!-- priority selection -->
         <button id='priorityPin' title='Keep priority selected'>📌</button>
         <select id='prioritySelector' required>
             <option class='priority-option' id='priorityNull' value=0 selected disabled>Set task priority (required)</option>
@@ -47,13 +38,26 @@
             <option class='priority-option' id='priority4' value=4>4:Very important</option>
             <option class='priority-option' id='priority5' value=5>5:Supremely important </option>
         </select>
-<!-- ADD button -->
+        <!-- ADD button -->
         <button id='addButton' name='addButton'>Add task</button>
         <label id='errorLabel' hidden></label>
     </div>
-    
-    <div id='view'>
-        <!-- <div class='todoContainer'><div class='todoPriority'>p</div><div class='todoText'>text text text</div><div class='todoCreatedAt'>time time time</div></div> -->
+         <!--searchBar  -->
+    <div id='searchContainer'>
+        <input type="text" id="searchBar" placeholder="Search for a task"><br>
+        <p hidden id='searchError'>No tasks were found</p>
+        <div id="searchResults"></div>
+    </div>
+        <!-- the list -->
+    <div id='view' hidden></div>
+    <hr style="width:100%;text-align:left;margin-left:0">
+    <div id='storage'>
+        <button id='saveButton' title='Save list under this name'>Save as:</button>
+        <input id='storageInput' type="text" placeholder="Enter file name"title='Name to use for storage'>
+        <button id="loadButton" title='Load list and replace the current list'>Load</button>
+        <button id="appendButton" title='Load list append to current list'>Append</button>
+        <button id="removeButton" title='remove this name from storage'>Remove Save</button>
+        <button id="clearButton" title='clear list storage'>Clear Saves</button>
     </div>
 </body>
 </html>

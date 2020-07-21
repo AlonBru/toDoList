@@ -3,6 +3,7 @@ body{
     display: flex;
     flex-direction: column;
     align-content: center;
+    width:500px;
 }
 /* control */
 #control{
@@ -35,7 +36,7 @@ body{
     grid-row: 2/3;
     justify-content: space-around;
 }
-}
+
 #letter{
     color:gold;
 }
@@ -154,13 +155,26 @@ body{
     background:maroon;
     
 }
+/* search bar */
+#searchContainer{
+    display: flex;
+    flex-direction: column;
+    height:fit-content;
+    width: 500px;
+}
+#searchBar{
+
+}
+#searchError{
+    align-self: center;
+    color: crimson;
+}
 /* list items */
 #view{
     display: flex;
     flex-direction: column;
 }
 .todoContainer {
-    width:500px;
     height: fit-content;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
