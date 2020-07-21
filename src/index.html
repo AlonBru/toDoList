@@ -19,8 +19,8 @@
     <hr style="width:100%;text-align:left;margin-left:0">
     <div id='control'>
         <div id='title'>
-            <h1><span style="color: gold;">T</span>askList</h1>
-            <h2>life, organized </h2>
+            <div id="h1div"><h1>TaskList</h1></div>
+            <div id="h2div"><h2>life, organized </h2></div>
         </div>
 <!-- status -->
         <div id='taskStatus'>You currently have <span id='counter'>0</span> tasks on list</div>
@@ -38,11 +38,7 @@
 <!-- text input -->
         <input id='textInput' name="textInput" placeholder="e.g Take my towel"> 
 <!-- priority selection -->
-        <button id='priorityPin' title='Keep priority selected'>PIN
-            <!-- <div id='pin'>
-                    <div id='pinhead'></div> <div id='pinprick'></div> 
-            </div> -->
-        </button>
+        <button id='priorityPin' title='Keep priority selected'>📌</button>
         <select id='prioritySelector' required>
             <option class='priority-option' id='priorityNull' value=0 selected disabled>Set task priority (required)</option>
             <option class='priority-option' id='priority1' value=1>1:Least important</option>

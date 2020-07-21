@@ -296,6 +296,7 @@ const loadStorage= (id)=>{
     let file= JSON.parse(localStorage.getItem(storageInput.value));
     if(id==='loadButton')list.innerHTML='';
     for (let x of file){
+        debugger
         const item= create('div');
        list.appendChild(item)
        item.className='todoContainer';
