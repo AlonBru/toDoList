@@ -118,5 +118,7 @@ $ npm run test
  GOOD LUCK!
 
 ## SUBMISSION
--couldn't work that GIF command, made another one...
+-auto Gif
+![alt text](./readme-files/toDo.gif)
+-couldn't work that GIF command, here's another one (older build)...
 ![alt text](./readme-files/toDo.gif)
